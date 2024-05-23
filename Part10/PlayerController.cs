@@ -8,9 +8,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 VectorToLeft = new Vector2(-1, 0);
     private string CurrentAnimation = "";
 
-    public bool isPressedButtonRight = false;
-    public bool isPressedButtonLeft = false;
-
     public bool OnGround = false;
     public float MoveSpeed = 1;
     public float JumpStrength = 1;
@@ -19,26 +16,6 @@ public class PlayerController : MonoBehaviour
     public Animator PlayerAnimator;
 
     void Update()
-    {
-        //KeyboardMovement();
-        TouchMovement();
-    }
-    void TouchMovement()
-    {
-        if (isPressedButtonRight == true)
-        {
-            PlayerMoveRight();
-        }
-        else if (isPressedButtonLeft == true)
-        {
-            PlayerMoveLeft();
-        }
-        else
-        {
-            PlayerStopMovement();
-        }
-    }
-    void KeyboardMovement()
     {
         if (Input.GetKey("d"))
         {
@@ -58,6 +35,7 @@ public class PlayerController : MonoBehaviour
             PlayerJump();
         }
     }
+    
     void PlayerMove(Vector2 MoveVector)
     {
         Vector2 NewMoveVector = new Vector2(MoveVector.x * MoveSpeed, PlayerRigidbody2D.velocity.y);
