@@ -8,23 +8,23 @@ public void PlayerJump()
         if (JumpCount < MaxJumpCount)
         {
             JumpCount++;
-
-            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
             StartCoroutine(AnimationJump());
             StartCoroutine(CheckJumpCount());
+
+            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
         }
     }
     if (OnGround == false && JumpCount > 0)
     {
         if (JumpCount < MaxJumpCount)
         {
-            
-            StartCoroutine(AnimationJump());
-            StartCoroutine(MoreJump()); // fixed Jump 1,2,3,4... same Strength of Jump 0
             JumpCount++;
+            StartCoroutine(AnimationJump());
+
+            PlayerRigidbody2D.velocity = new Vector2(PlayerRigidbody2D.velocity.x, 0); // fixed Jump 1,2,3,4... same Strength of Jump 0
+            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
         }
     }
-    
 }
 public void ResetJumpCount()
 {
