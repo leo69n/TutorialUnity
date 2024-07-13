@@ -1,0 +1,29 @@
+public int JumpCount = 0;
+public int MaxJumpCount = 2;
+public void PlayerJump()
+{
+    if (OnGround == true && JumpCount <= 0)
+    {
+        if (JumpCount < MaxJumpCount)
+        {
+            JumpCount++;
+
+            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
+            StartCoroutine(AnimationJump());
+        }
+    }
+    if (OnGround == false && JumpCount > 0)
+    {
+        if (JumpCount < MaxJumpCount)
+        {
+            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
+            StartCoroutine(AnimationJump());
+
+            JumpCount++;
+        }
+    }
+}
+public void ResetJumpCount()
+{
+    JumpCount = 0;
+}
