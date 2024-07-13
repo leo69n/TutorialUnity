@@ -9,7 +9,7 @@ public void PlayerJump()
         {
             JumpCount++;
             StartCoroutine(AnimationJump());
-            StartCoroutine(CheckJumpCount());
+            StartCoroutine(CheckJumpCount()); // reset JumpCount if press Jump but Player not leave the Ground for some reasons
 
             PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
         }
