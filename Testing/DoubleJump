@@ -7,10 +7,8 @@ public void PlayerJump()
     {
         if (JumpCount < MaxJumpCount)
         {
+            DoJumpForce();
             JumpCount++;
-
-            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
-            StartCoroutine(AnimationJump());
             StartCoroutine(CheckJumpCount()); // reset JumpCount if Jump but not leave the Ground
         }
     }
@@ -18,12 +16,15 @@ public void PlayerJump()
     {
         if (JumpCount < MaxJumpCount)
         {
-            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
-            StartCoroutine(AnimationJump());
-
+            DoJumpForce();
             JumpCount++;
         }
     }
+}
+private void DoJumpForce()
+{
+    PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
+    StartCoroutine(AnimationJump());
 }
 public void ResetJumpCount()
 {
