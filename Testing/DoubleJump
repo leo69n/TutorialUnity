@@ -7,24 +7,24 @@ public void PlayerJump()
     {
         if (JumpCount < MaxJumpCount)
         {
-            DoJumpForce();
             JumpCount++;
-            StartCoroutine(CheckJumpCount()); // reset JumpCount if Jump but not leave the Ground
+
+            PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
+            StartCoroutine(AnimationJump());
+            StartCoroutine(CheckJumpCount());
         }
     }
     if (OnGround == false && JumpCount > 0)
     {
         if (JumpCount < MaxJumpCount)
         {
-            DoJumpForce();
+            
+            StartCoroutine(AnimationJump());
+            StartCoroutine(MoreJump()); // fixed Jump 1,2,3,4... same Strength of Jump 0
             JumpCount++;
         }
     }
-}
-private void DoJumpForce()
-{
-    PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
-    StartCoroutine(AnimationJump());
+    
 }
 public void ResetJumpCount()
 {
@@ -37,6 +37,12 @@ IEnumerator CheckJumpCount()
     {
         JumpCount = 0;
     }
+}
+IEnumerator MoreJump()
+{
+    PlayerRigidbody2D.velocity = new Vector2(PlayerRigidbody2D.velocity.x, 0);
+    yield return null;
+    PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
 }
 
 //inside PlayerFeetBoxCast script
