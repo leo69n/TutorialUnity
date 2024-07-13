@@ -1,6 +1,6 @@
 //inside PlayerController script
 public int JumpCount = 0;
-public int MaxJumpCount = 2;
+public int MaxJumpCount = 2; // MaxJumpCount = 3 for Triple Jump
 public void PlayerJump()
 {
     if (OnGround == true && JumpCount <= 0)
