@@ -1,3 +1,4 @@
+//inside PlayerController script
 public int JumpCount = 0;
 public int MaxJumpCount = 2;
 public void PlayerJump()
@@ -10,7 +11,7 @@ public void PlayerJump()
 
             PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
             StartCoroutine(AnimationJump());
-            StartCoroutine(CheckJumpCount()); // nếu bị đụng tường nên chân không rời đất được
+            StartCoroutine(CheckJumpCount()); // reset JumpCount if Jump but not leave the Ground
         }
     }
     if (OnGround == false && JumpCount > 0)
@@ -35,4 +36,10 @@ IEnumerator CheckJumpCount()
     {
         JumpCount = 0;
     }
+}
+
+//inside PlayerFeetBoxCast script
+private void OnTriggerEnter2D(Collider2D collision)
+{
+    PlayerControllerScript.ResetJumpCount();
 }
