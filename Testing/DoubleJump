@@ -38,12 +38,6 @@ IEnumerator CheckJumpCount()
         JumpCount = 0;
     }
 }
-IEnumerator MoreJump()
-{
-    PlayerRigidbody2D.velocity = new Vector2(PlayerRigidbody2D.velocity.x, 0);
-    yield return null;
-    PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
-}
 
 //inside PlayerFeetBoxCast script
 private void OnTriggerEnter2D(Collider2D collision)
