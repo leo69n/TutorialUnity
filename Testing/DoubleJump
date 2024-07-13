@@ -10,6 +10,7 @@ public void PlayerJump()
 
             PlayerRigidbody2D.AddForce(new Vector2(0, 1) * JumpStrength, ForceMode2D.Impulse);
             StartCoroutine(AnimationJump());
+            StartCoroutine(CheckJumpCount()); // nếu bị đụng tường nên chân không rời đất được
         }
     }
     if (OnGround == false && JumpCount > 0)
@@ -26,4 +27,12 @@ public void PlayerJump()
 public void ResetJumpCount()
 {
     JumpCount = 0;
+}
+IEnumerator CheckJumpCount()
+{
+    yield return new WaitForSeconds(0.1f);
+    if (OnGround == true)
+    {
+        JumpCount = 0;
+    }
 }
