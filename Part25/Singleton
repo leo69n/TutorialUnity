@@ -1,0 +1,13 @@
+public static ClassName Singleton { get; private set; } //ClassName is name of your C# script
+
+private void Awake()
+{
+    if (Singleton != null && Singleton != this)
+    {
+        Destroy(this.gameObject);
+    }
+    else
+    {
+        Singleton = this;
+    }
+}
