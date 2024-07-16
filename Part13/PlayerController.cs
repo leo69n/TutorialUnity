@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         }
 
         
-        if (Input.GetKey("left shift") == true)
+        if (Input.GetKey("left shift") == true && OnGround == true)
         {
             PlayerRunOn();
         }
