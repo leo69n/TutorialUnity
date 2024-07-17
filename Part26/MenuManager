@@ -1,0 +1,99 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MenuManager : MonoBehaviour
+{
+    public AudioSource AudioSourceComponent;
+    public AudioClip Sound_Click;
+
+    public GameObject SelectIcon;
+    public List<GameObject> MenuList;
+    int MenuIndex = 0;
+    public string MenuName = "Menu-StartGame";
+
+    GamepadInput GamepadInputComponent;
+    private void Awake()
+    {
+        GamepadInputComponent = FindObjectOfType<GamepadInput>();
+    }
+    private void Update()
+    {
+        //Gamepad
+        if (GamepadInputComponent.onButtonDown["Select Up"] == true)
+        {
+            SelectPreviousMenu();
+            PlaySoundClick();
+        }
+        if (GamepadInputComponent.onButtonDown["Select Down"] == true)
+        {
+            SelectNextMenu();
+            PlaySoundClick();
+        }
+        if (GamepadInputComponent.onButtonDown["Enter"] == true)
+        {
+            MenuSelected(); //Go to Next Scene
+            PlaySoundClick();
+        }
+
+        //Keyboard
+        if (Input.GetKeyDown(KeyCode.UpArrow)) //press Button Up Arrow
+        {
+            SelectPreviousMenu();
+            PlaySoundClick();
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow)) //press Button Down Arrow
+        {
+            SelectNextMenu();
+            PlaySoundClick();
+        }
+        if (Input.GetKeyDown(KeyCode.Return)) //press Button Enter
+        {
+            MenuSelected(); //Go to Next Scene
+            PlaySoundClick();
+        }
+    }
+    void MenuSelected()
+    {
+        if (MenuName == "Menu-StartGame")
+        {
+            ApplicationVariables.LoadingSceneName = "Level1";
+            SceneManager.LoadScene("LoadingScene");
+        }
+        if (MenuName == "Menu-Settings")
+        {
+            ApplicationVariables.LoadingSceneName = "Settings";
+            SceneManager.LoadScene("LoadingScene");
+        }
+        if (MenuName == "Menu-Exit")
+        {
+            Application.Quit();
+        }
+    }
+    void SelectNextMenu()
+    {
+        MenuIndex = MenuIndex + 1;
+        if (MenuIndex >= MenuList.Count)
+        {
+            MenuIndex = 0;
+        }
+        GameObject SelectingMenu = MenuList[MenuIndex];
+        SelectIcon.transform.position = new Vector2(SelectIcon.transform.position.x, SelectingMenu.transform.position.y);
+        MenuName = SelectingMenu.name;
+    }
+    void SelectPreviousMenu()
+    {
+        MenuIndex = MenuIndex - 1;
+        if (MenuIndex < 0)
+        {
+            MenuIndex = MenuList.Count - 1;
+        }
+        GameObject SelectingMenu = MenuList[MenuIndex];
+        SelectIcon.transform.position = new Vector2(SelectIcon.transform.position.x, SelectingMenu.transform.position.y);
+        MenuName = SelectingMenu.name;
+    }
+    void PlaySoundClick()
+    {
+        AudioSourceComponent.PlayOneShot(Sound_Click);
+    }
+}
