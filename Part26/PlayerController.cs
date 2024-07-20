@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
         //TouchController();
         GamepadController();
     }
+
     void GamepadController()
     {
         if (GamepadInputComponent != null)
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            if (GamepadInputComponent.onButtonHold["Run"] == true && OnGround == true)
+            if (GamepadInputComponent.onButtonHold["Run"] == true)
             {
                 PlayerRunOn();
             }
@@ -75,8 +76,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
+
     }
+
     void KeyboardController()
     {
         if (Input.GetKey("d"))
@@ -98,7 +100,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (Input.GetKey("left shift") == true && OnGround == true)
+        if (Input.GetKey("left shift") == true)
         {
             PlayerRunOn();
         }
@@ -108,9 +110,25 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    void TouchController()
+    {
+        if (isPressedButtonRight == true)
+        {
+            PlayerMoveRight();
+        }
+        else if (isPressedButtonLeft == true)
+        {
+            PlayerMoveLeft();
+        }
+        else
+        {
+            PlayerStopMovement();
+        }
+    }
     public void PlayerRunOn()
     {
-        if (MoveSpeed != RunSpeed)
+        if (MoveSpeed != RunSpeed && OnGround == true)
         {
             StartCoroutine(ChangePlayerSpeed(RunSpeed));
         }
@@ -127,21 +145,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitUntil(() => OnGround == true);
         MoveSpeed = NewSpeed;
     }
-    void TouchController()
-    {
-        if (isPressedButtonRight == true)
-        {
-            PlayerMoveRight();
-        }
-        else if (isPressedButtonLeft == true)
-        {
-            PlayerMoveLeft();
-        }
-        else
-        {
-            PlayerStopMovement();
-        }
-    }
+    
     void PlayerMove(Vector2 MoveVector)
     {
         Vector2 NewMoveVector = new Vector2(MoveVector.x * MoveSpeed, PlayerRigidbody2D.velocity.y);
