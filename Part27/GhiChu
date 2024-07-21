@@ -1,0 +1,7 @@
+public void OnPointerMove(PointerEventData eventData)
+{
+    if (name == "Touch Area Left")
+    {
+        JoystickManagerComponent.OnJoystickTouching(eventData.position); // maybe glitch if touch on Run Button will move Player ... on Remote test only, on real phone none
+    }
+}
