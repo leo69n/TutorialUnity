@@ -1,5 +1,35 @@
-Vector2 Direction2Points2D(Vector2 Point1, Vector2 Point2)
+using UnityEngine;
+
+public class JoystickManager : MonoBehaviour
 {
-    var Direction2D = Point1 - Point2;
-    return Direction2D.normalized;
+    public GameObject TouchPoint;
+    public PlayerController PlayerControllerComponent;
+
+    public void OnJoystickTouching(Vector2 TouchPosition)
+    {
+        var TouchingDirection = Direction2Points2D(TouchPosition, transform.position);
+        Debug.Log("" + TouchingDirection);
+
+        if (TouchingDirection.x > 0)
+        {
+            PlayerControllerComponent.isPressedButtonRight = true;
+            PlayerControllerComponent.isPressedButtonLeft = false;
+        }
+        else if (TouchingDirection.x < 0)
+        {
+            PlayerControllerComponent.isPressedButtonLeft = true;
+            PlayerControllerComponent.isPressedButtonRight = false;
+        }
+        else
+        {
+            PlayerControllerComponent.isPressedButtonLeft = false;
+            PlayerControllerComponent.isPressedButtonRight = false;
+        }
+    }
+    Vector2 Direction2Points2D(Vector2 Point1, Vector2 Point2)
+    {
+        var Direction2D = Point1 - Point2;
+        return Direction2D.normalized;
+    }
 }
+ 
