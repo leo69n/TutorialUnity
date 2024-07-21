@@ -1,0 +1,21 @@
+//Direction2D from 2 Points
+Vector2 Direction2Points2D(Vector2 Point1, Vector2 Point2) // Start from Point1
+{
+    var Direction2D = Point1 - Point2;
+    return Direction2D.normalized;
+}
+
+//Angle2D from 2 Points
+int Angle360Between2Points2D(Vector2 Point1, Vector2 Point2) // Point1 is Center Position
+{
+    var AngleValue = Mathf.RoundToInt((float)((Mathf.Atan2(Point2.y - Point1.y, Point2.x - Point1.x) * (180/3.14) ) % 360));
+    
+    if (AngleValue < 0)
+    {
+        return Mathf.RoundToInt(360 - Mathf.Abs(AngleValue));
+    }
+    else
+    {
+        return AngleValue;
+    }
+}
