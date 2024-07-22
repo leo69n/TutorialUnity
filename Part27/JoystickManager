@@ -55,8 +55,8 @@ public class JoystickManager : MonoBehaviour
 
     void MoveTouchPointIcon(Vector2 TouchPosition)
     {
-        var ClosetPosition = Collider2DComponent.ClosestPoint(TouchPosition);
-        TouchPointIcon.transform.position = ClosetPosition;
+        var ClosestPosition = Collider2DComponent.ClosestPoint(TouchPosition);
+        TouchPointIcon.transform.position = ClosestPosition;
     }
 }
  
