@@ -2,6 +2,9 @@ public void OnPointerMove(PointerEventData eventData)
 {
     if (name == "Touch Area Left")
     {
-        JoystickManagerComponent.OnJoystickTouching(eventData.position); // maybe glitch if touch on Run Button will move Player ... on Remote test only, on real phone none
+        JoystickManagerComponent.OnJoystickTouching(eventData.position); 
+        // maybe glitch if touch on Run Button will move Player ... on Remote test only, on real phone none
+        // reason: stack of mouse position
+        // removed it on remote too : check eventData.position is onCollder of Touch Area Left
     }
 }
