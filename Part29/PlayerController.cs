@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     GamepadInput GamepadInputComponent;
     private void Awake()
     {
-        Physics2D.IgnoreLayerCollision(0, 10); // Camera Cinemachine
+        //Physics2D.IgnoreLayerCollision(10, 0);//Ignore Player & Background when Player is in Default Layer for Ground check 
+        Physics2D.IgnoreLayerCollision(10, 11);// Ignore Player & Background when Player is in Player Layer for Ground check
         Physics2D.IgnoreLayerCollision(11, 12);// Ignore Bullet & Player
         Physics2D.IgnoreLayerCollision(10, 12);// Ignore Bullet & Background
         Physics2D.IgnoreLayerCollision(12, 12);// Ignore Bullet & Bullet
