@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
     void PlayerMove(Vector2 MoveVector)
     {
         //float fixSpeed = Mathf.Abs(MoveSpeed) + Mathf.Abs(MovingPlatformSpeed);
-        float fixSpeed = MoveVector.x * MoveSpeed;
+        float fixSpeed = MoveVector.x * MoveSpeed; fixSpeed = CurrentVelocity
         if (MovingPlatformSpeed != 0)
         {
             fixSpeed = (MoveSpeed * MoveVector.x) + MovingPlatformSpeed;
