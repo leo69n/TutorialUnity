@@ -1,7 +1,7 @@
 //Direction2D from 2 Points
 Vector2 Direction2Points2D(Vector2 Point1, Vector2 Point2) // Start from Point1
 {
-    var Direction2D = Point1 - Point2;
+    var Direction2D = Point2 - Point1;
     return Direction2D.normalized;
 }
 
