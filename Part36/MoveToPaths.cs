@@ -31,10 +31,11 @@ public class MoveToPaths : MonoBehaviour
     }
     IEnumerator MoveTo()
     {
-        Rigidbody2DComponent.velocity = Vector2.zero;
+        Rigidbody2DComponent.velocity = Vector2.zero; //stop and waiting
         yield return new WaitForSeconds(WaitTime);
+        
         var DirectionToPath = Direction2Points2D(transform.position, CurrentPath.transform.position);
-        Rigidbody2DComponent.velocity = DirectionToPath * MoveSpeed;
+        Rigidbody2DComponent.velocity = DirectionToPath * MoveSpeed; //moving to Current Path
     }
     Vector2 Direction2Points2D(Vector2 Point1, Vector2 Point2) // Start from Point1
     {
